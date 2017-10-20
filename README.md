@@ -2,6 +2,8 @@
 
 A simple clone of the minesweeper game with 9x9 grid and 10 mines, written in python.
 
+![minesweeper](images/minesweeper.png)
+
 ## Prerequisites
 
 1. Python 2.7
