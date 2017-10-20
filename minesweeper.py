@@ -129,6 +129,8 @@ cells = [[Cell() for i in range(COLUMNS)] for j in range(ROWS)]
 mines_left = MINES
 mines_detected = []
 
+game_over = False
+
 font = pygame.font.SysFont('Arial', 30)
 text_surface = font.render(str(mines_left), False, BLACK)
 
@@ -138,14 +140,13 @@ text_surface = font.render(str(mines_left), False, BLACK)
 # 	cells[pos[0]][pos[1]].set_value(-1)
 
 while len(mine_positions) < MINES:
-# for i in range(MINES):
 	x_coord = random.randint(0, COLUMNS - 1)
 	y_coord = random.randint(0, ROWS - 1)
 	if [x_coord, y_coord] not in mine_positions:
 		mine_positions.append([x_coord, y_coord])		
 		cells[x_coord][y_coord].set_value(-1)
 
-print mine_positions
+# print mine_positions
 
 for i in range(ROWS):
 	for j in range(COLUMNS):
@@ -164,10 +165,14 @@ while 1:
 		cells[x_coord][y_coord].set_image_name(find_image_name_by_value(cells[x_coord][y_coord].get_value()))
 
 		if(cells[x_coord][y_coord].has_mine()):
+			text_surface = font.render('You Lost :(', False, BLACK)
+			game_over = True
 			for i in range(ROWS):
 				for j in range(COLUMNS):
 					cells[i][j].set_visibility(True)
 					cells[i][j].set_image_name(find_image_name_by_value(cells[i][j].get_value()))
+					
+
 
 		if(cells[x_coord][y_coord].get_value() == 0):
 			neighbours = find_neighbours(cells, x_coord, y_coord)
@@ -185,17 +190,18 @@ while 1:
 			cells[x_coord][y_coord].set_flag(True)
 			cells[x_coord][y_coord].set_image_name('images/flag.png')
 
-	for i in range(ROWS):
-		for j in range(COLUMNS):
-				if cells[i][j].get_flag():
-					if [i, j] not in mines_detected:
-						mines_detected.append([i, j])
-						mines_left = MINES - len(mines_detected)
-				else:
-					if [i, j] in mines_detected:
-						mines_detected.remove([i, j])
-						mines_left += 1
-				text_surface = font.render(str(mines_left), False, BLACK)
+	if not game_over:
+		for i in range(ROWS):
+			for j in range(COLUMNS):
+					if cells[i][j].get_flag():
+						if [i, j] not in mines_detected:
+							mines_detected.append([i, j])
+							mines_left = MINES - len(mines_detected)
+					else:
+						if [i, j] in mines_detected:
+							mines_detected.remove([i, j])
+							mines_left += 1
+					text_surface = font.render(str(mines_left), False, BLACK)
 
 	if mines_left == 0:
 		mine_positions.sort(key = lambda x: (x[0], x[1]))
@@ -205,6 +211,7 @@ while 1:
 			message = 'You Won :)'
 		else:
 			message = 'You Lost :('
+		game_over = True
 		text_surface = font.render(message, False, BLACK)
 
 	for i in range(ROWS):
