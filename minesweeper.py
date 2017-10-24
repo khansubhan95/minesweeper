@@ -23,8 +23,7 @@ WIDTH = DIMENSION
 HEIGHT = DIMENSION
 
 CELL_SIZE = [WIDTH, HEIGHT]
-# WINDOW_SIZE= [COLUMNS * WIDTH, ROWS * HEIGHT]
-WINDOW_SIZE= [COLUMNS * WIDTH, ROWS * HEIGHT + 30]
+WINDOW_SIZE= [COLUMNS * WIDTH, (ROWS * HEIGHT) + DIMENSION]
 
 class Cell:
 	def __init__(self):
@@ -76,7 +75,7 @@ def print_array(arr):
 
 def find_valid_indices(i, j):
     temp = []
-    temp.extend([[i-1,j],[i+1,j],[i,j-1],[i,j+1],[i-1,j-1],[i-1,j+1],[i+1,j-1],[i+1,j+1]])
+    temp.extend([[i - 1, j], [i + 1, j], [i, j - 1], [i, j + 1], [i - 1, j - 1], [i - 1, j + 1], [i + 1, j - 1], [i + 1, j + 1]])
     valid = []
     for t in temp:
         if -1 in t:
@@ -221,6 +220,6 @@ while 1:
 			cell_down_rect.x = j * WIDTH
 			cell_down_rect.y = i * HEIGHT
 			surface.blit(cell_down, cell_down_rect)
-			surface.blit(text_surface, ((COLUMNS * WIDTH - text_surface.get_rect().width) / 2, 275))
+			surface.blit(text_surface, ((COLUMNS * WIDTH - text_surface.get_rect().width) / 2, (ROWS * HEIGHT)))
 
 	pygame.display.update()
