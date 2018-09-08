@@ -2,7 +2,7 @@
 
 A simple clone of the minesweeper game with 9x9 grid and 10 mines, written in Python.
 
-![minesweeper](images/minesweeper.jpg)
+![minesweeper](Screenshots/minesweeper.jpg)
 
 ## Prerequisites
 
@@ -11,14 +11,14 @@ A simple clone of the minesweeper game with 9x9 grid and 10 mines, written in Py
 
 ## Installation
 
-Install pygame
-```
-pip install pygame
-```
-
 Clone the repo
 ```
 git clone https://github.com/khansubhan95/minesweeper
+```
+
+Install dependencies
+```
+pip install -r requirements.txt
 ```
 
 Enter into the cloned repo and run

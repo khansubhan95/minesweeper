@@ -208,6 +208,11 @@ while 1:
 		message = ''
 		if mine_positions == mines_detected:
 			message = 'You Won :)'
+			for i in range(ROWS):
+				for j in range(COLUMNS):
+                                    if not cells[i][j].get_flag():
+                                            cells[i][j].set_visibility(True)
+                                            cells[i][j].set_image_name(find_image_name_by_value(cells[i][j].get_value()))
 		else:
 			message = 'You Lost :('
 		game_over = True
