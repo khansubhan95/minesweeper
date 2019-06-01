@@ -140,7 +140,7 @@ while len(mine_positions) < MINES:
 		mine_positions.append([x_coord, y_coord])		
 		cells[x_coord][y_coord].set_value(-1)
 
-print(mine_positions)
+# print(mine_positions)
 
 for i in range(ROWS):
 	for j in range(COLUMNS):
